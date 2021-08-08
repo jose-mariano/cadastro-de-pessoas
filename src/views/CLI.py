@@ -45,9 +45,9 @@ class CLI:
 
 		print('\033[33;1m=========== CADASTRAR PESSOA ===========\033[m')
 
-		data['name'] = str(input('\033[33;1mName:\033[m '))
-		data['birthDate'] = str(input('\033[33;1mBirth Date (DD-MM-YYYY):\033[m '))
-		data['gender'] = str(input('\033[33;1mGender:\033[m '))
+		data['name'] = str(input('\033[33;1mName:\033[m ')).strip()
+		data['birthDate'] = str(input('\033[33;1mBirth Date (DD-MM-YYYY):\033[m ')).strip()
+		data['gender'] = str(input('\033[33;1mGender:\033[m ')).strip().lower()
 
 		print('\033[33;1m========================================\033[m')
 
