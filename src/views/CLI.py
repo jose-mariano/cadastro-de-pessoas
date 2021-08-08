@@ -1,10 +1,43 @@
 class CLI:
-	def __init__(self):
+	def __init__(self, controller):
 		self.data = dict()
+		self.controller = controller
+		self.options = [
+			{
+				'name': 'Ver pessoas cadastradas',
+				'action': print
+			},
+			{
+				'name': 'Cadastrar nova pessoa',
+				'action': print
+			},
+			{
+				'name': 'Sair',
+				'action': self.exit
+			}
+		]
 
-	def getPersonData(self):
-		self.data['name'] = str(input('Name: '))
-		self.data['gender'] = str(input('Gender: '))
-		self.data['birthDate'] = str(input('Birth date (DD-MM-YYYY): '))
+	def start(self):
+		print('\033[33;1m================= MENU =================')
 
-		return self.data
+		for index, item in enumerate(self.options):
+			print(f"[{index + 1}] - {item['name']}")
+
+		print('========================================')
+
+		try:
+			userChoice = int(input('Opção: \033[m')) - 1
+
+			if (0 <= userChoice < len(self.options)):
+				action = self.options[userChoice]['action']
+				action()
+			else:
+				print('\033[31;1mEscolha inválida, tente novamente!\033[m')
+				self.start()
+
+		except:
+			print('\033[31;1mPor favor, informe apenas números!\033[m')
+			self.start()
+
+	def exit(self):
+		print('\033[32;1mSistema finalizado com sucesso!\033[m')
