@@ -6,6 +6,9 @@ class IndexController:
 		self.interface.start()
 
 
+	def registerPerson(self, data):
+		print('\033[32;1mPessoa salva com sucesso!\033[m')
+
 
 
 if __name__ == '__main__':

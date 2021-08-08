@@ -1,6 +1,5 @@
 class CLI:
 	def __init__(self, controller):
-		self.data = dict()
 		self.controller = controller
 		self.options = [
 			{
@@ -9,13 +8,14 @@ class CLI:
 			},
 			{
 				'name': 'Cadastrar nova pessoa',
-				'action': print
+				'action': self.pageRegisterPerson
 			},
 			{
 				'name': 'Sair',
 				'action': self.exit
 			}
 		]
+
 
 	def start(self):
 		print('\033[33;1m================= MENU =================')
@@ -38,6 +38,21 @@ class CLI:
 		except:
 			print('\033[31;1mPor favor, informe apenas números!\033[m')
 			self.start()
+
+
+	def pageRegisterPerson(self):
+		data = dict()
+
+		print('\033[33;1m=========== CADASTRAR PESSOA ===========\033[m')
+
+		data['name'] = str(input('\033[33;1mName:\033[m '))
+		data['birthDate'] = str(input('\033[33;1mBirth Date (DD-MM-YYYY):\033[m '))
+		data['gender'] = str(input('\033[33;1mGender:\033[m '))
+
+		print('\033[33;1m========================================\033[m')
+
+		self.controller.registerPerson(data)
+
 
 	def exit(self):
 		print('\033[32;1mSistema finalizado com sucesso!\033[m')
