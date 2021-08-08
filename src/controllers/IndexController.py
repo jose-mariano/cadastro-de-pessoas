@@ -10,6 +10,11 @@ class IndexController:
 		print('\033[32;1mPessoa salva com sucesso!\033[m')
 
 
+	def getRegisteredPeople(self):
+		return []
+
+
+
 
 if __name__ == '__main__':
 	IndexController()

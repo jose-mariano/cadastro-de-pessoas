@@ -4,7 +4,7 @@ class CLI:
 		self.options = [
 			{
 				'name': 'Ver pessoas cadastradas',
-				'action': print
+				'action': self.pageSeeRegisteredPeople
 			},
 			{
 				'name': 'Cadastrar nova pessoa',
@@ -52,6 +52,20 @@ class CLI:
 		print('\033[33;1m========================================\033[m')
 
 		self.controller.registerPerson(data)
+
+
+	def pageSeeRegisteredPeople(self):
+		people = self.controller.getRegisteredPeople()
+
+		print('\033[33;1m========= PESSOAS CADASTRADAS ==========\033[m')
+
+		if (len(people) == 0):
+			print('Não há pessoas cadastradas!')
+		else:
+			for person in people:
+				print(person)
+
+		print('\033[33;1m========================================\033[m')
 
 
 	def exit(self):
