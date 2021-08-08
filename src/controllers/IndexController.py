@@ -1,4 +1,5 @@
 from src.views.CLI import CLI as Interface
+from src.models.ValidatePersonalData import ValidatePersonalData
 
 class IndexController:
 	def __init__(self):
