@@ -7,3 +7,13 @@ class ValidatePersonalData:
 
 		return False
 
+
+	def isValidName(self, name):
+		nameLength = len(name)
+		
+		if ((nameLength == 0) or (nameLength < 3)):
+			return False
+
+		return True
+
+
