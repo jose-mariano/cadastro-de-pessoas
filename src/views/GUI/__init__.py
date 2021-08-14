@@ -8,10 +8,17 @@ class GUI:
 		self.controller = controller
 		self.config = tk.Tk()
 		self.config.title("Cadastro de pessoas")
-		self.config.wm_geometry("700x400")
+		self.config.wm_geometry("800x400")
+		self.config.resizable(height=False, width=False)
+		self.config.tk_setPalette(
+			background="#FFF",
+			foreground="#000",
+			activeBackground="#191970",
+			activeForeground="#FFF"
+		)
 
 
-	def createPages(self):
+	def __createPages(self):
 		buttonframe = tk.Frame(self.config, bg='white')
 		buttonframe.pack(side="top", fill="x", expand=False)
 
@@ -25,7 +32,7 @@ class GUI:
 		registerPersonPage = RegisterPersonPage(self.config)
 		registerPersonPage.place(in_=container, x=0, y=0, relwidth=1, relheight=1)
 
-		seeRegisteredPeoplePage = SeeRegisteredPeoplePage(self.config, [])
+		seeRegisteredPeoplePage = SeeRegisteredPeoplePage(self.config)
 		seeRegisteredPeoplePage.place(in_=container, x=0, y=0, relwidth=1, relheight=1)
 
 
@@ -56,5 +63,5 @@ class GUI:
 
 
 	def start(self):
-		self.createPages()
+		self.__createPages()
 		self.config.mainloop()
