@@ -13,7 +13,7 @@ class ValidatePersonalData:
 	def isValidName(self, name):
 		nameLength = len(name)
 		
-		if (nameLength < 3):
+		if ((nameLength < 3) or (not name.isalpha())):
 			return False
 
 		return True

@@ -46,7 +46,6 @@ class CLI:
 		data = dict()
 
 		self.show('=========== CADASTRAR PESSOA ===========', 'yellow')
-
 		self.show('Nome: ', 'yellow', end="")
 		data['name'] = str(input()).strip()
 
@@ -60,11 +59,9 @@ class CLI:
 
 		self.show('Sexo(Masculino|Feminino): ', 'yellow', end="")
 		data['gender'] = str(input()).strip().lower()
-
 		self.show('========================================', 'yellow')
 
 		result = self.controller.registerPerson(data)
-
 		if (result['success']):
 			self.show('Cadastro efetuado com sucesso!', 'green')
 		else:
@@ -76,7 +73,6 @@ class CLI:
 		people = self.controller.getRegisteredPeople()
 
 		self.show('========= PESSOAS CADASTRADAS ==========', 'yellow')
-
 		if (len(people) == 0):
 			self.show('Não há pessoas cadastradas!', 'cyan')
 		else:
