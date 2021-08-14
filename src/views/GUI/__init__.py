@@ -8,11 +8,11 @@ class GUI:
 		self.controller = controller
 		self.config = tk.Tk()
 		self.config.title("Cadastro de pessoas")
-		self.config.wm_geometry("400x400")
+		self.config.wm_geometry("700x400")
 
 
 	def createPages(self):
-		buttonframe = tk.Frame(self.config)
+		buttonframe = tk.Frame(self.config, bg='white')
 		buttonframe.pack(side="top", fill="x", expand=False)
 
 		container = tk.Frame(self.config)
@@ -22,19 +22,33 @@ class GUI:
 		welcomePage = WelcomePage(self.config)
 		welcomePage.place(in_=container, x=0, y=0, relwidth=1, relheight=1)
 
-		seeRegisteredPeoplePage = SeeRegisteredPeoplePage(self.config)
-		seeRegisteredPeoplePage.place(in_=container, x=0, y=0, relwidth=1, relheight=1)
-
 		registerPersonPage = RegisterPersonPage(self.config)
 		registerPersonPage.place(in_=container, x=0, y=0, relwidth=1, relheight=1)
 
+		seeRegisteredPeoplePage = SeeRegisteredPeoplePage(self.config, [])
+		seeRegisteredPeoplePage.place(in_=container, x=0, y=0, relwidth=1, relheight=1)
+
 
 		# Config buttons
-		seeRegisteredPeoplePageButton = tk.Button(buttonframe, text="Ver pessoas cadastradas", command=seeRegisteredPeoplePage.show)
-		seeRegisteredPeoplePageButton.pack(side="left")
+		registerPersonPageButton = tk.Button(
+			buttonframe,
+			text="Cadastrar",
+			bg="#4169E1",
+			fg="white",
+			width=20,
+			command=registerPersonPage.show
+		)
+		registerPersonPageButton.pack(side="left", expand=True)
 
-		registerPersonPageButton = tk.Button(buttonframe, text="Cadastrar", command=registerPersonPage.show)
-		registerPersonPageButton.pack(side="left")
+		seeRegisteredPeoplePageButton = tk.Button(
+			buttonframe,
+			text="Ver pessoas cadastradas",
+			bg="#4169E1",
+			fg="white",
+			width=20,
+			command=seeRegisteredPeoplePage.show
+		)
+		seeRegisteredPeoplePageButton.pack(side="right", expand=True)
 
 
 		# Start default page
