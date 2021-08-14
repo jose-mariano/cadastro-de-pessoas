@@ -1,10 +1,10 @@
-from src.views.CLI import CLI as Interface
+from src.views.CLI import CLI
 from src.models.ValidatePersonalData import ValidatePersonalData
 from src.models.PeopleDatabase import PeopleDatabase
 
 class IndexController:
 	def __init__(self):
-		self.interface = Interface(self)
+		self.interface = CLI(self)
 		self.validator = ValidatePersonalData()
 		self.database = PeopleDatabase('people.sqlite3')
 
@@ -19,9 +19,7 @@ class IndexController:
 		if (isValidData['erro']):
 			return {'success': False, 'messages': isValidData['messages']}
 
-		self.database.addPerson(data)
-
-		return {'success': True}
+		return self.database.addPerson(data)
 
 
 	def getRegisteredPeople(self):

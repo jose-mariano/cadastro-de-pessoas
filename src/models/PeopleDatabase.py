@@ -32,9 +32,13 @@ class PeopleDatabase:
 			INSERT INTO people(name, birth_date, gender)
 			VALUES (?,?,?);
 		"""
+		try:
+			self.cursor.execute(sql, data)
+			self.db.commit()
 
-		self.cursor.execute(sql, data)
-		self.db.commit()
+			return {"success": True}
+		except:
+			return {"success": False, "messages": ["Erro ao salvar pessoa no banco!"]}
 
 
 	def getPeople(self):
@@ -43,5 +47,10 @@ class PeopleDatabase:
 			ORDER BY name;
 		"""
 
-		self.cursor.execute(sql)
-		return self.cursor.fetchall()
+		try:
+			self.cursor.execute(sql)
+			result = self.cursor.fetchall()
+			
+			return {"success": True, "data": result}
+		except:
+			return {"success": False, "messages": ["Erro ao selecionar as pessoas!"]}
