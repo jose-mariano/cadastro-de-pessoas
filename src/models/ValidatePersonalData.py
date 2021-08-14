@@ -35,3 +35,21 @@ class ValidatePersonalData:
 			return False
 
 		return True
+
+
+	def checkPersonalData(self, data):
+		error = list()
+
+		if (not isValidName(data['name'])):
+			error.append('Nome inválido!')
+
+		if (not isValidBirthDate(data['birthDate'])):
+			error.append('Data de nascimento inválida!')
+
+		if (not isValidGender(data['gender'])):
+			error.append('Gênero inválido!')
+
+		if (len(error) != 0):
+			return {'erro': True, 'messages': error}
+
+		return {'erro': False}
