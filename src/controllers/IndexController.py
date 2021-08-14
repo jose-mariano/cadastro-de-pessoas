@@ -19,6 +19,8 @@ class IndexController:
 		if (isValidData['erro']):
 			return {'success': False, 'messages': isValidData['messages']}
 
+		self.database.addPerson(data)
+
 		return {'success': True}
 
 
