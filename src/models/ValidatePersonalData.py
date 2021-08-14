@@ -40,13 +40,13 @@ class ValidatePersonalData:
 	def checkPersonalData(self, data):
 		error = list()
 
-		if (not isValidName(data['name'])):
+		if (not self.isValidName(data['name'])):
 			error.append('Nome inválido!')
 
-		if (not isValidBirthDate(data['birthDate'])):
+		if (not self.isValidBirthDate(data['birthDate'])):
 			error.append('Data de nascimento inválida!')
 
-		if (not isValidGender(data['gender'])):
+		if (not self.isValidGender(data['gender'])):
 			error.append('Gênero inválido!')
 
 		if (len(error) != 0):

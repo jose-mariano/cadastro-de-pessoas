@@ -4,11 +4,20 @@ from src.models.ValidatePersonalData import ValidatePersonalData
 class IndexController:
 	def __init__(self):
 		self.interface = Interface(self)
+		self.validator = ValidatePersonalData()
+
+
+	def start(self):
 		self.interface.start()
 
 
 	def registerPerson(self, data):
-		print('\033[32;1mPessoa salva com sucesso!\033[m')
+		isValidData = self.validator.checkPersonalData(data)
+
+		if (isValidData['erro']):
+			return {'success': False, 'messages': isValidData['messages']}
+
+		return {'success': True}
 
 
 	def getRegisteredPeople(self):
@@ -18,4 +27,4 @@ class IndexController:
 
 
 if __name__ == '__main__':
-	IndexController()
+	IndexController().start()

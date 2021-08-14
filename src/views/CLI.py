@@ -54,7 +54,13 @@ class CLI:
 
 		print('\033[33;1m========================================\033[m')
 
-		self.controller.registerPerson(data)
+		result = self.controller.registerPerson(data)
+
+		if (result['success']):
+			print('\033[32;1mCadastro efetuado com sucesso!\033[m')
+		else:
+			for msg in result['messages']:
+				print(f'\033[31;1m{msg}\033[m')
 
 
 	def pageSeeRegisteredPeople(self):
