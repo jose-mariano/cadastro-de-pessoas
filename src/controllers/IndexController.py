@@ -25,7 +25,7 @@ class IndexController:
 
 
 	def getRegisteredPeople(self):
-		return []
+		return self.database.getPeople()
 
 
 

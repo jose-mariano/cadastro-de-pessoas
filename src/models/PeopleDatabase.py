@@ -36,3 +36,12 @@ class PeopleDatabase:
 		self.cursor.execute(sql, data)
 		self.db.commit()
 
+
+	def getPeople(self):
+		sql = """
+			SELECT name, birth_date, gender FROM people
+			ORDER BY name;
+		"""
+
+		self.cursor.execute(sql)
+		return self.cursor.fetchall()
