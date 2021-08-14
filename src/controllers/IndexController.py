@@ -1,10 +1,10 @@
-from src.views.CLI import CLI
+from src.views.GUI import GUI
 from src.models.ValidatePersonalData import ValidatePersonalData
 from src.models.PeopleDatabase import PeopleDatabase
 
 class IndexController:
 	def __init__(self):
-		self.interface = CLI(self)
+		self.interface = GUI(self)
 		self.validator = ValidatePersonalData()
 		self.database = PeopleDatabase('people.sqlite3')
 
