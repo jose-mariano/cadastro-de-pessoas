@@ -1,6 +1,7 @@
 class CLI:
 	def __init__(self, controller):
 		self.controller = controller
+		self.active = True
 		self.options = [
 			{
 				'name': 'Ver pessoas cadastradas',
@@ -18,64 +19,95 @@ class CLI:
 
 
 	def start(self):
-		print('\033[33;1m================= MENU =================')
+		self.show('================= MENU =================', 'yellow')
 
 		for index, item in enumerate(self.options):
-			print(f"[{index + 1}] - {item['name']}")
+			self.show(f"[{index + 1}] - {item['name']}", 'yellow')
 
-		print('========================================')
+		self.show('========================================', 'yellow')
 
 		try:
-			userChoice = int(input('Opção: \033[m')) - 1
+			self.show('Opção: ', 'yellow', end="")
+			userChoice = int(input()) - 1
 
 			if (0 <= userChoice < len(self.options)):
 				action = self.options[userChoice]['action']
 				action()
 			else:
-				print('\033[31;1mEscolha inválida, tente novamente!\033[m')
-				self.start()
-
+				self.show('Escolha inválida, tente novamente!', 'red')
 		except:
-			print('\033[31;1mPor favor, informe apenas números!\033[m')
+			self.show('Por favor, informe apenas números!', 'red')
+		
+		if (self.active):
 			self.start()
 
 
 	def pageRegisterPerson(self):
 		data = dict()
 
-		print('\033[33;1m=========== CADASTRAR PESSOA ===========\033[m')
+		self.show('=========== CADASTRAR PESSOA ===========', 'yellow')
 
-		data['name'] = str(input('\033[33;1mNome:\033[m ')).strip()
-		birthDay = str(input('\033[33;1mDia de nascimento:\033[m ')).strip()
-		birthMonth = str(input('\033[33;1mMês de nascimento:\033[m ')).strip()
-		birthYear = str(input('\033[33;1mAno de nascimento:\033[m ')).strip()
+		self.show('Nome: ', 'yellow', end="")
+		data['name'] = str(input()).strip()
+
+		self.show('Dia de nascimento: ', 'yellow', end="")
+		birthDay = str(input()).strip()
+		self.show('Mês de nascimento: ', 'yellow', end="")
+		birthMonth = str(input()).strip()
+		self.show('Ano de nascimento: ', 'yellow', end="")
+		birthYear = str(input()).strip()
 		data['birthDate'] = f'{birthYear}-{birthMonth}-{birthDay}'
-		data['gender'] = str(input('\033[33;1mSexo (masculino/feminino):\033[m ')).strip().lower()
 
-		print('\033[33;1m========================================\033[m')
+		self.show('Sexo(Masculino|Feminino): ', 'yellow', end="")
+		data['gender'] = str(input()).strip().lower()
+
+		self.show('========================================', 'yellow')
 
 		result = self.controller.registerPerson(data)
 
 		if (result['success']):
-			print('\033[32;1mCadastro efetuado com sucesso!\033[m')
+			self.show('Cadastro efetuado com sucesso!', 'green')
 		else:
 			for msg in result['messages']:
-				print(f'\033[31;1m{msg}\033[m')
+				self.show(msg, 'red')
 
 
 	def pageSeeRegisteredPeople(self):
 		people = self.controller.getRegisteredPeople()
 
-		print('\033[33;1m========= PESSOAS CADASTRADAS ==========\033[m')
+		self.show('========= PESSOAS CADASTRADAS ==========', 'yellow')
 
 		if (len(people) == 0):
-			print('Não há pessoas cadastradas!')
+			self.show('Não há pessoas cadastradas!', 'cyan')
 		else:
 			for person in people:
 				print(person)
 
-		print('\033[33;1m========================================\033[m')
-
 
 	def exit(self):
-		print('\033[32;1mSistema finalizado com sucesso!\033[m')
+		self.active = False
+		self.show('Sistema finalizado com sucesso!', 'green')
+
+
+	def show(self, text, color='white', **kwargs):
+		colors = {
+			'white': '\033[1;97m',
+			'black': '\033[1;30m',
+			'red': '\033[1;31m',
+			'green': '\033[1;32m',
+			'yellow': '\033[1;33m',
+			'blue': '\033[1;34m',
+			'magenta': '\033[1;35m',
+			'cyan': '\033[1;36m',
+			'lightGray': '\033[1;37m',
+			'darkGrey': '\033[1;90m',
+			'lightRed': '\033[1;91m',
+			'lightGreen': '\033[1;92m',
+			'lightYellow': '\033[1;93m',
+			'lightBlue': '\033[1;94m',
+			'lightMagenta': '\033[1;95m',
+			'lightCyan': '\033[1;96m'
+		}
+		reset = '\033[0;0m'
+
+		print(f'{colors[color]}{text}{reset}', **kwargs)
