@@ -12,8 +12,9 @@ class ValidatePersonalData:
 
 	def isValidName(self, name):
 		nameLength = len(name)
+		nameWithoutSpaces = name.replace(' ', '')
 		
-		if ((nameLength < 3) or (not name.isalpha())):
+		if ((nameLength < 3) or (not nameWithoutSpaces.isalpha())):
 			return False
 
 		return True
