@@ -45,9 +45,12 @@ class CLI:
 
 		print('\033[33;1m=========== CADASTRAR PESSOA ===========\033[m')
 
-		data['name'] = str(input('\033[33;1mName:\033[m ')).strip()
-		data['birthDate'] = str(input('\033[33;1mBirth Date (DD-MM-YYYY):\033[m ')).strip()
-		data['gender'] = str(input('\033[33;1mGender:\033[m ')).strip().lower()
+		data['name'] = str(input('\033[33;1mNome:\033[m ')).strip()
+		birthDay = str(input('\033[33;1mDia de nascimento:\033[m ')).strip()
+		birthMonth = str(input('\033[33;1mMês de nascimento:\033[m ')).strip()
+		birthYear = str(input('\033[33;1mAno de nascimento:\033[m ')).strip()
+		data['birthDate'] = f'{birthYear}-{birthMonth}-{birthDay}'
+		data['gender'] = str(input('\033[33;1mSexo (masculino/feminino):\033[m ')).strip().lower()
 
 		print('\033[33;1m========================================\033[m')
 
