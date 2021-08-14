@@ -77,7 +77,17 @@ class CLI:
 			self.show('Não há pessoas cadastradas!', 'cyan')
 		else:
 			for person in people:
-				print(person)
+				name = person[0]
+				birthYear, birthMonth, birthDay = person[1].split('-')
+				gender = person[2]
+
+				self.show('Nome: ', 'yellow', end="")
+				self.show(name, 'cyan')
+				self.show('Nascimento: ', 'yellow', end="")
+				self.show(f'{birthDay}/{birthMonth}/{birthYear}', 'cyan')
+				self.show('Sexo: ', 'yellow', end="")
+				self.show(gender, 'cyan')
+				self.show('----------------------------------------', 'yellow')
 
 
 	def exit(self):
