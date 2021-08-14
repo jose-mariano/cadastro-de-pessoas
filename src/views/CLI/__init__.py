@@ -70,24 +70,32 @@ class CLI:
 
 
 	def pageSeeRegisteredPeople(self):
-		people = self.controller.getRegisteredPeople()
+		result = self.controller.getRegisteredPeople()
+		people = result['data']
 
 		self.show('========= PESSOAS CADASTRADAS ==========', 'yellow')
+		if (not result['success']):
+			for msg in result['messages']:
+				self.show(msg, 'red')
+
+			return
+
 		if (len(people) == 0):
 			self.show('Não há pessoas cadastradas!', 'cyan')
-		else:
-			for person in people:
-				name = person[0]
-				birthYear, birthMonth, birthDay = person[1].split('-')
-				gender = person[2]
+			return
+		
+		for person in people:
+			name = person[0]
+			birthYear, birthMonth, birthDay = person[1].split('-')
+			gender = person[2]
 
-				self.show('Nome: ', 'yellow', end="")
-				self.show(name, 'cyan')
-				self.show('Nascimento: ', 'yellow', end="")
-				self.show(f'{birthDay}/{birthMonth}/{birthYear}', 'cyan')
-				self.show('Sexo: ', 'yellow', end="")
-				self.show(gender, 'cyan')
-				self.show('----------------------------------------', 'yellow')
+			self.show('Nome: ', 'yellow', end="")
+			self.show(name, 'cyan')
+			self.show('Nascimento: ', 'yellow', end="")
+			self.show(f'{birthDay}/{birthMonth}/{birthYear}', 'cyan')
+			self.show('Sexo: ', 'yellow', end="")
+			self.show(gender, 'cyan')
+			self.show('----------------------------------------', 'yellow')
 
 
 	def exit(self):
