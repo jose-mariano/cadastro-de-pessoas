@@ -4,13 +4,18 @@ from src.views.GUI.Page import Page
 class SeeRegisteredPeoplePage(Page):
 	def __init__(self, *args, **kwargs):
 		Page.__init__(self, *args, **kwargs)
-		self.tableData = [0, 0, 0, 0, 0, 0, 0]
+		self.tableData = list()
 
 		self.__createTable()
 
 
 	def setTableData(self, data):
 		self.tableData = data
+
+
+	def updateTable(self):
+		self.__clearTable()
+		self.__createTable()
 
 
 	def __createTable(self):
@@ -62,35 +67,39 @@ class SeeRegisteredPeoplePage(Page):
 		body.pack()
 		
 		for person in self.tableData:
+			personName = person["name"]
+			personBirthDate = person["birthDate"]
+			personGender = person["gender"]
+
 			line = tk.Frame(body)
 			line.pack()
 
-			personName = tk.Label(
+			labelPersonName = tk.Label(
 				line,
-				text="José Mariano da Silva",
+				text=personName,
 				width=45,
 				font=('Arial', 12),
 				anchor="w"
 			)
-			personName.pack(side="left")
+			labelPersonName.pack(side="left")
 
-			personBirthDate = tk.Label(
+			labelPersonBirthDate = tk.Label(
 				line,
-				text="08/02/2002",
+				text=personBirthDate,
 				width=20,
 				font=('Arial', 12),
 				anchor="w"
 			)
-			personBirthDate.pack(side="left")
+			labelPersonBirthDate.pack(side="left")
 
-			personGender = tk.Label(
+			labelPersonGender = tk.Label(
 				line,
-				text="Masculino",
+				text=personGender,
 				width=20,
 				font=('Arial', 12),
 				anchor="w"
 			)
-			personGender.pack(side="left")
+			labelPersonGender.pack(side="left")
 
 
 	def __clearTable(self):
