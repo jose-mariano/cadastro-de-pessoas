@@ -32,8 +32,8 @@ class GUI:
 		registerPersonPage = RegisterPersonPage(self.config)
 		registerPersonPage.place(in_=container, x=0, y=0, relwidth=1, relheight=1)
 
-		seeRegisteredPeoplePage = SeeRegisteredPeoplePage(self.config)
-		seeRegisteredPeoplePage.place(in_=container, x=0, y=0, relwidth=1, relheight=1)
+		self.seeRegisteredPeoplePage = SeeRegisteredPeoplePage(self.config)
+		self.seeRegisteredPeoplePage.place(in_=container, x=0, y=0, relwidth=1, relheight=1)
 
 
 		# Config buttons
@@ -53,13 +53,35 @@ class GUI:
 			bg="#4169E1",
 			fg="white",
 			width=20,
-			command=seeRegisteredPeoplePage.show
+			command=self.__showSeeRegisteredPeoplePage
 		)
 		seeRegisteredPeoplePageButton.pack(side="right", expand=True)
 
 
 		# Start default page
 		welcomePage.show()
+
+
+	def __showSeeRegisteredPeoplePage(self):
+		def normalizeRegisteredPeopleData(peopleData):
+			name = peopleData[0]
+
+			year, month, day = peopleData[1].split("-")
+			date = f"{day}/{month}/{year}"
+
+			gender = peopleData[2].capitalize()
+
+			return {"name": name, "birthDate": date, "gender": gender}
+
+
+		resultGetRegisteredPeople = self.controller.getRegisteredPeople()
+
+		if (resultGetRegisteredPeople["success"]):
+			normalizedPeopleData = list(map(normalizeRegisteredPeopleData, resultGetRegisteredPeople['data']))
+
+			self.seeRegisteredPeoplePage.setTableData(normalizedPeopleData)
+			self.seeRegisteredPeoplePage.updateTable()
+			self.seeRegisteredPeoplePage.show()
 
 
 	def start(self):
