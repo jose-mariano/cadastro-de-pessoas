@@ -29,7 +29,7 @@ class GUI:
 		welcomePage = WelcomePage(self.config)
 		welcomePage.place(in_=container, x=0, y=0, relwidth=1, relheight=1)
 
-		registerPersonPage = RegisterPersonPage(self.config)
+		registerPersonPage = RegisterPersonPage(self.config, onSubmitForm=self.controller.registerPerson)
 		registerPersonPage.place(in_=container, x=0, y=0, relwidth=1, relheight=1)
 
 		self.seeRegisteredPeoplePage = SeeRegisteredPeoplePage(self.config)

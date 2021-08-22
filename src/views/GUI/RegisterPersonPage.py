@@ -3,6 +3,12 @@ from src.views.GUI.Page import Page
 
 class RegisterPersonPage(Page):
 	def __init__(self, *args, **kwargs):
+		if ('onSubmitForm' in kwargs.keys()):
+			self.onSubmitForm = kwargs['onSubmitForm']
+			del kwargs['onSubmitForm']
+		else:
+			raise 'The onSubmitForm was not declared!'
+
 		Page.__init__(self, *args, **kwargs)
 		self.genderOptions = ['', 'Masculino', 'Feminino']
 		
@@ -81,12 +87,12 @@ class RegisterPersonPage(Page):
 		)
 		genderLabel.pack(side="left")
 
-		genderOptions = tk.StringVar(genderContainer)
-		genderOptions.set(self.genderOptions[0])
+		self.genderSelectOptions = tk.StringVar(genderContainer)
+		self.genderSelectOptions.set(self.genderOptions[0])
 
 		genderSelect = tk.OptionMenu(
 			genderContainer,
-			genderOptions,
+			self.genderSelectOptions,
 			*self.genderOptions
 		)
 		genderSelect.pack(side="left")
@@ -102,7 +108,7 @@ class RegisterPersonPage(Page):
 			bg="#4169E1",
 			fg="white",
 			width=40,
-			command=self.__savePerson
+			command=self.__submitForm
 		)
 		button.pack()
 
@@ -119,6 +125,12 @@ class RegisterPersonPage(Page):
 		self.error.pack()
 
 
-	def __savePerson(self):
-		print("Nova pessoa salva com sucesso!")
+	def __submitForm(self):
+		data = {
+			"name": self.nameEntry.get(),
+			"birthDate": f'{self.birthYearEntry.get()}-{self.birthMonthEntry.get()}-{self.birthDayEntry.get()}',
+			"gender": self.genderSelectOptions.get()
+		}
+
+		print(self.onSubmitForm(data))
 
