@@ -39,7 +39,7 @@ class GUI:
 		# Config buttons
 		registerPersonPageButton = tk.Button(
 			buttonframe,
-			text="Cadastrar",
+			text="Cadastrar nova pessoa",
 			bg="#4169E1",
 			fg="white",
 			width=20,
