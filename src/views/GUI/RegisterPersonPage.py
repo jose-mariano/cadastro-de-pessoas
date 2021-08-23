@@ -16,16 +16,16 @@ class RegisterPersonPage(Page):
 
 
 	def __createForm(self):
+		form = tk.Frame(self)
+		form.pack()
+
 		title = tk.Label(
-			self,
+			form,
 			text="Página de cadastro",
 			font=('Arial', 14, 'bold'),
 			pady=30
 		)
 		title.pack()
-
-		form = tk.Frame(self)
-		form.pack()
 
 		# Name
 		nameContainer = tk.Frame(form, pady=10)
@@ -107,7 +107,7 @@ class RegisterPersonPage(Page):
 			text="Registrar",
 			bg="#4169E1",
 			fg="white",
-			width=40,
+			width=30,
 			command=self.__submitForm
 		)
 		button.pack()
@@ -117,11 +117,7 @@ class RegisterPersonPage(Page):
 		errorContainer = tk.Frame(form)
 		errorContainer.pack()
 
-		self.error = tk.Label(
-			errorContainer,
-			text="kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk",
-			font=("Arial", 8)
-		)
+		self.error = tk.Label(errorContainer, font=('Arial', 10))
 		self.error.pack()
 
 
@@ -132,5 +128,20 @@ class RegisterPersonPage(Page):
 			"gender": self.genderSelectOptions.get()
 		}
 
-		print(self.onSubmitForm(data))
+		result = self.onSubmitForm(data)
+		if (result['success']):
+			self.error['fg'] = "green"
+			self.error['text'] = "Cadastro efetuado com sucesso!"
+			self.__clearFields()
+		else:
+			self.error['fg'] = "red"
+			self.error['text'] = (" ".join(result['messages']))
+
+
+	def __clearFields(self):
+		self.nameEntry.delete(0, 'end')
+		self.birthDayEntry.delete(0, 'end')
+		self.birthMonthEntry.delete(0, 'end')
+		self.birthYearEntry.delete(0, 'end')
+		self.genderSelectOptions.set(self.genderOptions[0])
 
