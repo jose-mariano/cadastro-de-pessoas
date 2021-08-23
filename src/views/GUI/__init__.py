@@ -7,7 +7,7 @@ class GUI:
 	def __init__(self, controller):
 		self.controller = controller
 		self.config = tk.Tk()
-		self.config.title("Cadastro de pessoas")
+		self.config.title("Sistema de cadastro")
 		self.config.wm_geometry("800x400")
 		self.config.resizable(height=False, width=False)
 		self.config.tk_setPalette(
@@ -39,7 +39,7 @@ class GUI:
 		# Config buttons
 		registerPersonPageButton = tk.Button(
 			buttonframe,
-			text="Cadastrar nova pessoa",
+			text="Novo cadastro",
 			bg="#4169E1",
 			fg="white",
 			width=20,
