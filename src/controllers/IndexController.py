@@ -29,4 +29,4 @@ class IndexController:
 
 
 if __name__ == '__main__':
-	IndexController().start()
+	IndexController('GUI').start()

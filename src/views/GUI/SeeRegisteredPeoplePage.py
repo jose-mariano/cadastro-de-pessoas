@@ -4,13 +4,24 @@ from src.views.GUI.Page import Page
 class SeeRegisteredPeoplePage(Page):
 	def __init__(self, *args, **kwargs):
 		Page.__init__(self, *args, **kwargs)
-		self.tableData = list()
+		self.size = 10
+		self.tableData = [[]]
+		self.currentPage = 1
 
 		self.__createTable()
 
 
 	def setTableData(self, data):
-		self.tableData = data
+		newData = [[]]
+		lenNewData = len(newData)
+		for item in data:
+			newData[lenNewData - 1].append(item)
+
+			if (len(newData[lenNewData - 1]) == self.size):
+				newData.append([])
+				lenNewData += 1
+
+		self.tableData = newData
 
 
 	def updateTable(self):
@@ -66,7 +77,7 @@ class SeeRegisteredPeoplePage(Page):
 		body = tk.Frame(self.table)
 		body.pack()
 		
-		for person in self.tableData:
+		for person in self.tableData[self.currentPage - 1]:
 			personName = person["name"]
 			personBirthDate = person["birthDate"]
 			personGender = person["gender"]
@@ -100,6 +111,84 @@ class SeeRegisteredPeoplePage(Page):
 				anchor="w"
 			)
 			labelPersonGender.pack(side="left")
+
+		# Footer
+		footer = tk.Frame(self.table)
+		footer.pack(pady=5)
+
+		buttonFirstPage = tk.Button(
+			footer,
+			bg="#4169E1",
+			fg="#FFF",
+			font=('Arial', 10, 'bold'),
+			text="<<",
+			command=self.__firstPage
+		)
+		buttonFirstPage.pack(side="left")
+
+		buttonBackPage = tk.Button(
+			footer,
+			bg="#4169E1",
+			fg="#FFF",
+			font=('Arial', 10, 'bold'),
+			text="<",
+			command=self.__backPage
+		)
+		buttonBackPage.pack(side="left")
+
+		currentPage = tk.Label(
+			footer,
+			width=4,
+			height=2,
+			font=('Arial', 12, 'bold'),
+			text=self.currentPage
+		)
+		currentPage.pack(side="left")
+
+		buttonLastPage = tk.Button(
+			footer,
+			bg="#4169E1",
+			fg="#FFF",
+			font=('Arial', 10, 'bold'),
+			text=">>",
+			command=self.__lastPage
+		)
+		buttonLastPage.pack(side="right")
+
+		buttonNextPage = tk.Button(
+			footer,
+			bg="#4169E1",
+			fg="#FFF",
+			font=('Arial', 10, 'bold'),
+			text=">",
+			command=self.__nextPage
+		)
+		buttonNextPage.pack(side="right")
+
+
+	def __nextPage(self):
+		if ((self.currentPage + 1) <= len(self.tableData)):
+			self.currentPage += 1
+			self.updateTable()
+
+
+	def __backPage(self):
+		if ((self.currentPage - 1) >= 1):
+			self.currentPage -= 1
+			self.updateTable()
+
+
+	def __lastPage(self):
+		lengthTableData = len(self.tableData)
+		if (self.currentPage != lengthTableData):
+			self.currentPage = lengthTableData
+			self.updateTable()
+
+
+	def __firstPage(self):
+		if (self.currentPage != 1):
+			self.currentPage = 1
+			self.updateTable()
 
 
 	def __clearTable(self):
