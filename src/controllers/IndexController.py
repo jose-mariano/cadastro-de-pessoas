@@ -1,21 +1,10 @@
-from src.views.CLI import CLI
-from src.views.GUI import GUI
+from src.views import getInterface
 from src.models.ValidatePersonalData import ValidatePersonalData
 from src.models.PeopleDatabase import PeopleDatabase
 
 class IndexController:
-	def __init__(self, interface):
-		interfaces = {
-			"CLI": CLI,
-			"GUI": GUI
-		}
-
-		if (interface in interfaces.keys()):
-			selectedInterface = interfaces[interface]
-			self.interface = selectedInterface(self)
-		else:
-			raise "Enter which interface you want to use!"
-
+	def __init__(self, interface=''):
+		self.interface = getInterface(interface, self)
 		self.validator = ValidatePersonalData()
 		self.database = PeopleDatabase('people.sqlite3')
 
@@ -40,4 +29,4 @@ class IndexController:
 
 
 if __name__ == '__main__':
-	IndexController('GUI').start()
+	IndexController().start()
