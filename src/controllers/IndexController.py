@@ -1,6 +1,5 @@
 from src.views import getInterface
-from src.models.ValidatePersonalData import ValidatePersonalData
-from src.models.PeopleDatabase import PeopleDatabase
+from src.models import ValidatePersonalData, PeopleDatabase
 
 class IndexController:
 	def __init__(self, interface=''):
