@@ -1,10 +1,5 @@
+**/__pycache__
 .scannerwork
 sonarqube-command.txt
-src/__pycache__
-src/controllers/__pycache__
-src/models/__pycache__
-src/views/__pycache__
-src/views/CLI/__pycache__
-src/views/GUI/__pycache__
 people.sqlite3
 

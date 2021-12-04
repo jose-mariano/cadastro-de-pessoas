@@ -17,7 +17,7 @@ class PeopleRepository:
 			
 			return result
 		except:
-			raise Exception('Error getting people in database')
+			raise Exception('Erro ao obter pessoas do banco de dados!')
 	
 
 	def getPersonById(self, id):
@@ -31,7 +31,7 @@ class PeopleRepository:
 
 			return result
 		except:
-			raise Exception('Error getting person by id in database')
+			raise Exception('Erro ao obter pessoa por id do banco de dados!')
 	
 
 	def create(self, name, birthDate, gender):
@@ -46,7 +46,7 @@ class PeopleRepository:
 			self.repository.cursor.execute(sql, data)
 			self.repository.db.commit()
 		except:
-			raise Exception('Error inserting person in database')
+			raise Exception('Erro ao inserir pessoa no banco de dados!')
 
 
 	def update(self, id, name, birthDate, gender):
@@ -62,7 +62,7 @@ class PeopleRepository:
 			self.repository.cursor.execute(sql, data)
 			self.repository.db.commit()
 		except:
-			raise Exception('Error updating person in database')
+			raise Exception('Erro ao atualizar pessoa do banco de dados!')
 	
 
 	def delete(self, id):
@@ -74,5 +74,5 @@ class PeopleRepository:
 			self.repository.cursor.execute(sql, data)
 			self.repository.db.commit()
 		except:
-			raise Exception('Error deleting person in database')
+			raise Exception('Erro ao deletar pessoa do banco de dados!')
 

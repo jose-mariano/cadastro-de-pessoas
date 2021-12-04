@@ -1,2 +1,1 @@
-from .PeopleDatabase import *
-from .ValidatePersonalData import *
+from .Person import *
