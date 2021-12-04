@@ -26,7 +26,3 @@ class IndexController:
 		return self.database.getPeople()
 
 
-
-
-if __name__ == '__main__':
-	IndexController('GUI').start()
