@@ -3,11 +3,10 @@ from src.views.GUI.Page import Page
 
 class RegisterPersonPage(Page):
 	def __init__(self, *args, **kwargs):
+		self.onSubmitForm = print
 		if ('onSubmitForm' in kwargs.keys()):
 			self.onSubmitForm = kwargs['onSubmitForm']
 			del kwargs['onSubmitForm']
-		else:
-			raise 'The onSubmitForm was not declared!'
 
 		Page.__init__(self, *args, **kwargs)
 		self.genderOptions = ['', 'Masculino', 'Feminino']
